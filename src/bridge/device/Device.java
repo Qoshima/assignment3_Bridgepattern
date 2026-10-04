@@ -1,4 +1,5 @@
 package bridge.device;
 
-public class Device {
+public interface Device {
+    String applySettings(boolean powerOn, int volume);
 }
