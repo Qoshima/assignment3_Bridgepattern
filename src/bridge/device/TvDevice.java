@@ -1,4 +1,4 @@
-package bridge.remote;
+package bridge.device;
 
 public class TvDevice {
 }

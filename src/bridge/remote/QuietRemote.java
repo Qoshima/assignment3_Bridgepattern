@@ -1,4 +1,4 @@
-package bridge.device;
+package bridge.remote;
 
 public class QuietRemote {
 }

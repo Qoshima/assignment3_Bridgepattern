@@ -1,4 +1,4 @@
 package bridge.device;
 
-public class Remote {
+public class Device {
 }
