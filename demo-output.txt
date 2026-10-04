@@ -1,0 +1,9 @@
+T1 PASS | BasicRemote + TvDevice | result=TV | power=ON | volume=30
+T2 PASS | BasicRemote + RadioDevice | result=RADIO | power=ON | volume=30
+T3 PASS | QuietRemote + TvDevice | result=TV | power=ON | volume=5
+T4 PASS | QuietRemote + RadioDevice | result=RADIO | power=ON | volume=5
+T5 PASS | BasicRemote: TvDevice -> RadioDevice | sameObject=true | stateUnchanged=true
+   before=TV | power=ON | volume=30 | after=RADIO | power=ON | volume=30
+T6 PASS | BasicRemote + ProjectorDevice | result=PROJECTOR | power=ON | volume=30
+T7 PASS | QuietRemote + ProjectorDevice | result=PROJECTOR | power=ON | volume=5
+SUMMARY: 7/7 PASS

@@ -1,0 +1,88 @@
+diff --git a/src/Main.java b/src/Main.java
+index eec48ad..7929c8e 100644
+--- a/src/Main.java
++++ b/src/Main.java
+@@ -1,5 +1,6 @@
+ import bridge.device.RadioDevice;
+ import bridge.device.TvDevice;
++import bridge.device.ProjectorDevice;
+ import bridge.remote.BasicRemote;
+ import bridge.remote.QuietRemote;
+ 
+@@ -16,7 +17,7 @@ public class Main {
+ 
+     private static void runDemo() {
+         int passed = 0;
+-        int total = 5;
++        int total = 7;
+ 
+         if (runT1()) {
+             passed++;
+@@ -38,6 +39,14 @@ public class Main {
+             passed++;
+         }
+ 
++        if (runT6()){
++            passed++;
++        }
++
++        if (runT7()){
++            passed++;
++        }
++
+         System.out.println("SUMMARY: " + passed + "/" + total + " PASS");
+     }
+ 
+@@ -155,6 +164,36 @@ public class Main {
+         return passed;
+     }
+ 
++    private static boolean runT6() {
++        BasicRemote remote =
++                new BasicRemote("BASIC-02", new ProjectorDevice());
++
++        String actual = remote.execute();
++        String expected = "PROJECTOR | power=ON | volume=30";
++
++        return printResult(
++                "T6",
++                "BasicRemote + ProjectorDevice",
++                actual,
++                expected
++        );
++    }
++
++    private static boolean runT7() {
++        QuietRemote remote =
++                new QuietRemote("QUIET-02", new ProjectorDevice());
++
++        String actual = remote.execute();
++        String expected = "PROJECTOR | power=ON | volume=5";
++
++        return printResult(
++                "T7",
++                "QuietRemote + ProjectorDevice",
++                actual,
++                expected
++        );
++    }
++
+     private static boolean printResult(
+             String testId,
+             String participants,
+diff --git a/src/bridge/device/ProjectorDevice.java b/src/bridge/device/ProjectorDevice.java
+new file mode 100644
+index 0000000..5ef7de9
+--- /dev/null
++++ b/src/bridge/device/ProjectorDevice.java
+@@ -0,0 +1,10 @@
++package bridge.device;
++
++public class ProjectorDevice implements Device{
++    @Override
++    public String applySettings(boolean powerOn, int volume) {
++        String powerState = powerOn ? "ON" : "OFF";
++
++        return "PROJECTOR | power=" + powerState + " | volume=" + volume;
++    }
++}
