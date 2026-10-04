@@ -2,6 +2,7 @@ src/Main.java
 src/bridge/device/Device.java
 src/bridge/device/TvDevice.java
 src/bridge/device/RadioDevice.java
+src/bridge/device/ProjectorDevice.java
 src/bridge/remote/Remote.java
 src/bridge/remote/BasicRemote.java
 src/bridge/remote/QuietRemote.java

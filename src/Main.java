@@ -1,5 +1,6 @@
 import bridge.device.RadioDevice;
 import bridge.device.TvDevice;
+import bridge.device.ProjectorDevice;
 import bridge.remote.BasicRemote;
 import bridge.remote.QuietRemote;
 
@@ -16,7 +17,7 @@ public class Main {
 
     private static void runDemo() {
         int passed = 0;
-        int total = 5;
+        int total = 7;
 
         if (runT1()) {
             passed++;
@@ -35,6 +36,14 @@ public class Main {
         }
 
         if (runT5()) {
+            passed++;
+        }
+
+        if (runT6()){
+            passed++;
+        }
+
+        if (runT7()){
             passed++;
         }
 
@@ -153,6 +162,36 @@ public class Main {
         }
 
         return passed;
+    }
+
+    private static boolean runT6() {
+        BasicRemote remote =
+                new BasicRemote("BASIC-02", new ProjectorDevice());
+
+        String actual = remote.execute();
+        String expected = "PROJECTOR | power=ON | volume=30";
+
+        return printResult(
+                "T6",
+                "BasicRemote + ProjectorDevice",
+                actual,
+                expected
+        );
+    }
+
+    private static boolean runT7() {
+        QuietRemote remote =
+                new QuietRemote("QUIET-02", new ProjectorDevice());
+
+        String actual = remote.execute();
+        String expected = "PROJECTOR | power=ON | volume=5";
+
+        return printResult(
+                "T7",
+                "QuietRemote + ProjectorDevice",
+                actual,
+                expected
+        );
     }
 
     private static boolean printResult(
